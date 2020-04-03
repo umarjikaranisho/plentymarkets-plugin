@@ -11,9 +11,11 @@ use Wayfair\Repositories\KeyValueRepository;
 use Wayfair\Services\FullInventoryService;
 use Wayfair\Services\InventoryUpdateService;
 use Plenty\Plugin\Http\Request;
+use Plenty\Plugin\Log\Loggable;
 
 class FullInventoryController extends Controller
 {
+  use Loggable;
 
   /**
    * @param FullInventoryService $fullInventoryService
@@ -23,6 +25,7 @@ class FullInventoryController extends Controller
    */
   public function sync(FullInventoryService $fullInventoryService)
   {
+    $this->getLogger("Full_sync_debug")->debug("Wayfair::logger.debugInventoryUpdate", ['debugInfo' => 'myDebugInfo' ]);
     // set manual flag so that we know where sync request came from
     return \json_encode($fullInventoryService->sync(true));
   }
