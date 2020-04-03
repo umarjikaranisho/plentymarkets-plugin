@@ -22,7 +22,7 @@ class InventorySyncCron extends Cron {
      * @var LoggerContract $loggerContract
      */
     $loggerContract = pluginApp(LoggerContract::class);
-    $loggerContract->debug(TranslationHelper::getLoggerKey('cronStartedMessage'), ['method' => __METHOD__]);
+    $loggerContract->alert(TranslationHelper::getLoggerKey('cronStartedMessage'), ['method' => __METHOD__]);
     /**
      * @var InventoryUpdateService $inventoryUpdateService
      */
@@ -31,7 +31,7 @@ class InventorySyncCron extends Cron {
       $inventoryUpdateService->sync();
     }
     finally {
-      $loggerContract->debug(TranslationHelper::getLoggerKey('cronFinishedMessage'), ['method' => __METHOD__]);
+      $loggerContract->alert(TranslationHelper::getLoggerKey('cronFinishedMessage'), ['method' => __METHOD__]);
     }
   }
 }

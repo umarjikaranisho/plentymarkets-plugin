@@ -84,7 +84,7 @@ class OrderASNRepository extends Repository {
      */
     $loggerContract = pluginApp(LoggerContract::class);
     $loggerContract
-        ->info(
+        ->critical(
             TranslationHelper::getLoggerKey('addOrderToSentASNList'), [
             'additionalInfo' => ['order' => $data],
             'method' => __METHOD__

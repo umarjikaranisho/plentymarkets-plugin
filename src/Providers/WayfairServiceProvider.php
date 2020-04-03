@@ -80,7 +80,7 @@ class WayfairServiceProvider extends ServiceProvider {
     $cronContainer->add(CronContainer::EVERY_FIFTEEN_MINUTES, OrderAcceptCron::class);
     $cronContainer->add(CronContainer::DAILY, InventoryFullCron::class);
     $cronContainer->add(CronContainer::HOURLY, UpdateFullInventoryStatusCron::class);
-    $this->getLogger(__METHOD__)->debug(
+    $this->getLogger(__METHOD__)->alert(
         TranslationHelper::getLoggerKey('addedCronJobLog'),
         [
             'classes' => [
@@ -112,7 +112,7 @@ class WayfairServiceProvider extends ServiceProvider {
         OrderShipmentNotifyProcedure::class . '@run'
     );
 
-    $this->getLogger(__METHOD__)->debug(
+    $this->getLogger(__METHOD__)->alert(
         TranslationHelper::getLoggerKey('registeredShippingProvider'),
         [
             'controllers' => $shippingControllers

@@ -49,7 +49,7 @@ class FullInventoryService
     $externalLogs = pluginApp(ExternalLogs::class);
 
     try {
-      $loggerContract->debug(TranslationHelper::getLoggerKey(self::LOG_KEY_DEBUG), [
+      $loggerContract->alert(TranslationHelper::getLoggerKey(self::LOG_KEY_DEBUG), [
         'additionalInfo' => ['manual' => (string)$manual, 'message' => 'Checking if Full Inventory is currently running.'],
         'method' => __METHOD__
       ]);
@@ -58,7 +58,7 @@ class FullInventoryService
       $lastRun = $this->keyValueRepository->get(AbstractConfigHelper::FULL_INVENTORY_STATUS_UPDATED_AT);
       if ($cronStatus !== AbstractConfigHelper::FULL_INVENTORY_CRON_RUNNING) {
         $externalLogs->addInfoLog("Starting " . ($manual ? "Manual " : "Automatic") . "full inventory sync.");
-        $loggerContract->info(TranslationHelper::getLoggerKey(self::LOG_KEY_START), [
+        $loggerContract->critical(TranslationHelper::getLoggerKey(self::LOG_KEY_START), [
           'additionalInfo' => ['manual' => (string)$manual, 'lastRun' => $lastRun],
           'method' => __METHOD__
         ]);
@@ -77,7 +77,7 @@ class FullInventoryService
         } finally {
           $this->keyValueRepository->putOrReplace(AbstractConfigHelper::FULL_INVENTORY_CRON_STATUS, AbstractConfigHelper::FULL_INVENTORY_CRON_IDLE);
 
-          $loggerContract->debug(TranslationHelper::getLoggerKey(self::LOG_KEY_END), [
+          $loggerContract->alert(TranslationHelper::getLoggerKey(self::LOG_KEY_END), [
             'additionalInfo' => ['result' => $result],
             'method' => __METHOD__
           ]);
@@ -87,7 +87,7 @@ class FullInventoryService
       } else {
         $status = 'Sync is already running';
         // FIXME: this should be indicated in UI - currently says "synced" when skipped
-        $loggerContract->info(TranslationHelper::getLoggerKey(self::LOG_KEY_SKIPPED), [
+        $loggerContract->critical(TranslationHelper::getLoggerKey(self::LOG_KEY_SKIPPED), [
           'additionalInfo' => ['manual' => (string)$manual],
           'method' => __METHOD__
         ]);

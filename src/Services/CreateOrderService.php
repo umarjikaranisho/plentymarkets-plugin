@@ -202,7 +202,7 @@ class CreateOrderService
       $numberOfOrdersForPO = $orderList->getTotalCount();
       if ($numberOfOrdersForPO > 0) {
         // orders exist for the Wayfair PO. Do not create another one.
-        $loggerContract->info(TranslationHelper::getLoggerKey(self::LOG_KEY_ORDERS_ALREADY_EXIST), [
+        $loggerContract->critical(TranslationHelper::getLoggerKey(self::LOG_KEY_ORDERS_ALREADY_EXIST), [
           'additionalInfo' => ['poNumber' => $poNumber, 'orders' => $orderList->getResult()],
           'method' => __METHOD__
         ]);

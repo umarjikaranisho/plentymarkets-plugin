@@ -49,7 +49,7 @@ class ShippingController extends Controller {
   public function registerShipments(Request $request, array $orderIds): array {
     $orderIds = $this->processOrderIds($request, $orderIds);
     $this->loggerContract
-        ->info(
+        ->critical(
             TranslationHelper::getLoggerKey('registerShipmentForOrders'), [
             'additionalInfo' => ['orderIds' => $orderIds],
             'method' => __METHOD__
@@ -70,7 +70,7 @@ class ShippingController extends Controller {
   public function getLabels(Request $request, $orderIds): array {
     $orderIds = $this->processOrderIds($request, $orderIds);
     $this->loggerContract
-        ->info(
+        ->critical(
             TranslationHelper::getLoggerKey('getGeneratedLabels'), [
             'additionalInfo' => ['orderIds' => $orderIds],
             'method' => __METHOD__
@@ -91,7 +91,7 @@ class ShippingController extends Controller {
   public function deleteShipments(Request $request, array $orderIds): array {
     $orderIds = $this->processOrderIds($request, $orderIds);
     $this->loggerContract
-        ->info(
+        ->critical(
             TranslationHelper::getLoggerKey('deleteShipmentForOrders'), [
             'additionalInfo' => ['orderIds' => $orderIds],
             'method' => __METHOD__

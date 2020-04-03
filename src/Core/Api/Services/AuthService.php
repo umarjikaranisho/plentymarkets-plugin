@@ -84,7 +84,7 @@ class AuthService implements AuthenticationContract {
         ]
     ];
     $this->loggerContract
-        ->debug(TranslationHelper::getLoggerKey('attemptingAuthentication'), ['additionalInfo' => $arguments, 'method' => __METHOD__]);
+        ->alert(TranslationHelper::getLoggerKey('attemptingAuthentication'), ['additionalInfo' => $arguments, 'method' => __METHOD__]);
 
     return $this->client->call($method, $arguments);
   }

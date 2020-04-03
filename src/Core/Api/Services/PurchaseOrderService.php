@@ -58,7 +58,7 @@ class PurchaseOrderService extends APIService {
 
 
     $this->loggerContract
-        ->info(
+        ->critical(
             TranslationHelper::getLoggerKey('sendingPurchaseOrderQuery'), [
             'additionalInfo' => ['query' => $query],
             'method' => __METHOD__
@@ -69,7 +69,7 @@ class PurchaseOrderService extends APIService {
       $response     = $this->query($query);
       $responseBody = $response->getBodyAsArray();
       $this->loggerContract
-          ->info(
+          ->critical(
               TranslationHelper::getLoggerKey('purchaseOrderResponseData'), [
               'additionalInfo' => ['purchaseOrder' => $responseBody],
               'method' => __METHOD__

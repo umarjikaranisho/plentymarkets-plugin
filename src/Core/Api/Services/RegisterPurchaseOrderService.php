@@ -38,12 +38,12 @@ class RegisterPurchaseOrderService extends APIService implements RegisterPurchas
              . '} '
              . '}';
     $this->loggerContract
-        ->info(TranslationHelper::getLoggerKey('attemptingRegisterMutationQuery'), ['additionalInfo' => ['query' => $query], 'method' => __METHOD__]);
+        ->critical(TranslationHelper::getLoggerKey('attemptingRegisterMutationQuery'), ['additionalInfo' => ['query' => $query], 'method' => __METHOD__]);
     try {
       $response = $this->query($query);
       $responseBody = $response->getBodyAsArray();
       $this->loggerContract
-          ->info(TranslationHelper::getLoggerKey('registerMutationQueryResponse'), ['additionalInfo' => ['responseBody' => $responseBody], 'method' => __METHOD__]);
+          ->critical(TranslationHelper::getLoggerKey('registerMutationQueryResponse'), ['additionalInfo' => ['responseBody' => $responseBody], 'method' => __METHOD__]);
       if (isset($responseBody['errors']) || empty($responseBody['data']['purchaseOrders']['register'])) {
         $this->loggerContract
             ->error(

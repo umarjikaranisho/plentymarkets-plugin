@@ -38,7 +38,7 @@ class UpdateFullInventoryStatusCron extends Cron {
      */
     $loggerContract = pluginApp(LoggerContract::class);
 
-    $loggerContract->debug(TranslationHelper::getLoggerKey('cronStartedMessage'), ['method' => __METHOD__]);
+    $loggerContract->alert(TranslationHelper::getLoggerKey('cronStartedMessage'), ['method' => __METHOD__]);
     try {
       $dt = $this->keyValueRepository->get(AbstractConfigHelper::FULL_INVENTORY_STATUS_UPDATED_AT);
       if (!$dt || (\time() - \strtotime($dt)) > 7200) {
@@ -46,7 +46,7 @@ class UpdateFullInventoryStatusCron extends Cron {
       }
     }
     finally {
-      $loggerContract->debug(TranslationHelper::getLoggerKey('cronFinishedMessage'), ['method' => __METHOD__]);
+      $loggerContract->alert(TranslationHelper::getLoggerKey('cronFinishedMessage'), ['method' => __METHOD__]);
     }
   }
 }
