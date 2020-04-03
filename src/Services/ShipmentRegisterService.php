@@ -180,7 +180,7 @@ class ShipmentRegisterService
           sprintf(TranslationHelper::translate(self::LOG_KEY_ALREADY_REGISTERED),
             $shippingInformation->shippingServiceProvider, $orderId), []);
 
-      $this->loggerContract->critical(
+      $this->loggerContract->error(
         TranslationHelper::getLoggerKey(self::LOG_KEY_ALREADY_REGISTERED),
         [
           'additionalInfo' => [
@@ -513,7 +513,7 @@ class ShipmentRegisterService
             $this->saveShippingInformation($orderId, $shipmentItems);
 
             $this->loggerContract
-              ->critical(
+              ->error(
                 TranslationHelper::getLoggerKey(self::LOG_KEY_SAVED_SHIPMENT), [
                   'additionalInfo' => ['shipmentItems' => $shipmentItems],
                   'method' => __METHOD__,
@@ -732,7 +732,7 @@ class ShipmentRegisterService
       $this->registerResult[$orderId] = $this->buildResultMessage(false, $errorMessage, []);
 
       $this->loggerContract
-        ->alert(
+        ->error(
           TranslationHelper::getLoggerKey(self::LOG_KEY_SHIPPING_CANNOT_FIND_PO_NUMBER), [
             'additionalInfo' => ['orderId' => $orderId],
             'method' => __METHOD__

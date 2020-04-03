@@ -124,7 +124,7 @@ class SavePackingSlipService
     /** @var ExternalLogs $externalLogs */
     $externalLogs = pluginApp(ExternalLogs::class);
 
-    $this->loggerContract->alert(
+    $this->loggerContract->error(
       TranslationHelper::getLoggerKey(self::LOG_KEY_FETCHING_PACKING_SLIP),
       [
         'additionalInfo' => [
@@ -175,7 +175,7 @@ class SavePackingSlipService
       return [];
     }
 
-    $this->loggerContract->alert(
+    $this->loggerContract->error(
       TranslationHelper::getLoggerKey(self::LOG_KEY_FINISHED_FETCHING_PACKING_SLIP),
       [
         'additionalInfo' => [
@@ -189,7 +189,7 @@ class SavePackingSlipService
     try {
       $documentData = $this->buildDocumentData($poNumber, $contentBase64);
 
-      $this->loggerContract->alert(
+      $this->loggerContract->error(
         TranslationHelper::getLoggerKey(self::LOG_KEY_UPLOADING_ORDER_DOCUMENTS),
         [
           'additionalInfo' => [
@@ -202,7 +202,7 @@ class SavePackingSlipService
 
       $upload_result = $this->documentRepositoryContract->uploadOrderDocuments($orderId, Document::DELIVERY_NOTE, $documentData);
 
-      $this->loggerContract->alert(
+      $this->loggerContract->error(
         TranslationHelper::getLoggerKey(self::LOG_KEY_FINISHED_UPLOADING_ORDER_DOCUMENTS),
         [
           'additionalInfo' => [

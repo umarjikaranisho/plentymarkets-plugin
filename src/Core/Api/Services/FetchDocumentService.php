@@ -34,7 +34,7 @@ class FetchDocumentService extends APIService implements FetchDocumentContract
   {
     // FIXME: this should be using a generic client via an interface, not cURL!
     $this->loggerContract
-      ->alert(TranslationHelper::getLoggerKey('fetchingShipmentForURL'), ['additionalInfo' => ['url' => $url], 'method' => __METHOD__]);
+      ->error(TranslationHelper::getLoggerKey('fetchingShipmentForURL'), ['additionalInfo' => ['url' => $url], 'method' => __METHOD__]);
     $ch = curl_init();
     try {
       if (strpos($url, URLHelper::BASE_URL) !== false) {
@@ -84,7 +84,7 @@ class FetchDocumentService extends APIService implements FetchDocumentContract
     $query = $this->getTrackingNumberQuery($poNumber);
 
     $this->loggerContract
-      ->alert(
+      ->error(
         TranslationHelper::getLoggerKey(self::LOG_KEY_OBTAINING_TRACKING_NUMBER), [
           'additionalInfo' => [
             'poNumber' => $poNumber,
@@ -99,7 +99,7 @@ class FetchDocumentService extends APIService implements FetchDocumentContract
       $responseBody = $response->getBodyAsArray();
 
       $this->loggerContract
-        ->critical(
+        ->error(
           TranslationHelper::getLoggerKey(self::LOG_KEY_TRACKING_RESPONSE), [
             'additionalInfo' => ['responseBody' => $responseBody],
             'method' => __METHOD__

@@ -42,7 +42,7 @@ class InventoryService extends APIService
         throw new \Exception("Response object from inventory query is null or empty");
       }
 
-      $this->loggerContract->alert(
+      $this->loggerContract->error(
         TranslationHelper::getLoggerKey(self::LOG_KEY_INVENTORY_QUERY_DEBUG),
         [
           'additionalInfo' => [

@@ -29,7 +29,7 @@ class LoggingService implements LoggerContract {
    */
   public function debug(string $code, $loggingInfo = null) {
     list($additionalInfo, $method, $referenceType, $referenceValue) = $this->extractVars($loggingInfo);
-    $this->getPlentyMarketLoggerInstance($method, $referenceType, $referenceValue)->alert($code, $additionalInfo);
+    $this->getPlentyMarketLoggerInstance($method, $referenceType, $referenceValue)->error($code, $additionalInfo);
   }
 
   /**
@@ -40,7 +40,7 @@ class LoggingService implements LoggerContract {
    */
   public function info(string $code, $loggingInfo = null) {
     list($additionalInfo, $method, $referenceType, $referenceValue) = $this->extractVars($loggingInfo);
-    $this->getPlentyMarketLoggerInstance($method, $referenceType, $referenceValue)->critical($code, $additionalInfo);
+    $this->getPlentyMarketLoggerInstance($method, $referenceType, $referenceValue)->error($code, $additionalInfo);
   }
 
   /**

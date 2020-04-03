@@ -38,7 +38,7 @@ class InventoryUpdateService
     }
 
     if ($inventoryRequestDTO->getQuantityOnHand() < 0) {
-      $loggerContract->alert(
+      $loggerContract->error(
         TranslationHelper::getLoggerKey(self::LOG_KEY_NEGATIVE_INVENTORY), [
           'additionalInfo' => ['data' => $inventoryRequestDTO->toArray()],
           'method' => __METHOD__
@@ -87,7 +87,7 @@ class InventoryUpdateService
     /** @var array $syncResultObjects collection of the individual results of bulk update actions against the Wayfair API */
     $syncResultObjects = [];
 
-    $loggerContract->alert(
+    $loggerContract->error(
       TranslationHelper::getLoggerKey(self::LOG_KEY_INVENTORY_UPDATE_START), [
         'additionalInfo' => ['fullInventory' => (string)$fullInventory],
         'method' => __METHOD__
@@ -130,7 +130,7 @@ class InventoryUpdateService
 
         if (count($listOfItemsToBeUpdated) == 0) {
           $loggerContract
-            ->alert(
+            ->error(
               TranslationHelper::getLoggerKey(self::LOG_KEY_DEBUG), [
                 'additionalInfo' => ['info' => 'No items to update'],
                 'method' => __METHOD__
@@ -143,7 +143,7 @@ class InventoryUpdateService
 
           $externalLogs->addInfoLog('Inventory ' . ($fullInventory ? 'Full' : '') . ': ' . (string)$amt_to_update . ' items to update');
 
-          $loggerContract->alert(
+          $loggerContract->error(
             TranslationHelper::getLoggerKey(self::LOG_KEY_DEBUG), [
               'additionalInfo' => ['info' => (string)$amt_to_update . ' items to update'],
               'method' => __METHOD__
@@ -163,7 +163,7 @@ class InventoryUpdateService
           $syncResultObjects[] = $dto->toArray();
         }
 
-        $loggerContract->alert(
+        $loggerContract->error(
           TranslationHelper::getLoggerKey(self::LOG_KEY_DEBUG), [
             'additionalInfo' => ['fullInventory' => (string)$fullInventory, 'page_num' => (string)$page, 'info' => 'page done'],
             'method' => __METHOD__
@@ -173,7 +173,7 @@ class InventoryUpdateService
         $page++;
       } while (!$response->isLastPage());
 
-      $loggerContract->alert(
+      $loggerContract->error(
         TranslationHelper::getLoggerKey(self::LOG_KEY_INVENTORY_UPDATE_END), [
           'additionalInfo' => ['fullInventory' => (string)$fullInventory],
           'method' => __METHOD__

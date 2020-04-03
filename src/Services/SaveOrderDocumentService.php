@@ -146,7 +146,7 @@ class SaveOrderDocumentService
   public function save(string $fileName, string $fileData): StorageObject
   {
     $this->loggerContract
-      ->critical(
+      ->error(
         TranslationHelper::getLoggerKey('saveFileSThree'), [
           'additionalInfo' => ['key' => $fileName, 'data' => base64_encode($fileData)],
           'method' => __METHOD__

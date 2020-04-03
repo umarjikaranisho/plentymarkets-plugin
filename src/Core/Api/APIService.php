@@ -89,7 +89,7 @@ class APIService {
         ]
     ];
     $this->loggerContract
-        ->alert(TranslationHelper::getLoggerKey('apiService'), ['additionalInfo' => [
+        ->error(TranslationHelper::getLoggerKey('apiService'), ['additionalInfo' => [
           'url' => $url,
           'arguments' => $arguments
         ], 'method' => __METHOD__]);

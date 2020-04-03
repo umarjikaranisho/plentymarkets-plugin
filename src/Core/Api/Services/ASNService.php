@@ -40,7 +40,7 @@ class ASNService extends APIService {
       $query = $this->getMutationString();
       $params = ['notice' => $requestDTO->toArray()];
       $this->loggerContract
-        ->critical(
+        ->error(
           TranslationHelper::getLoggerKey(self::LOG_KEY_DEBUG_ASN_SENDING), [
             'additionalInfo' => ['query' => $query, 'params' => json_encode($params)],
             'method' => __METHOD__

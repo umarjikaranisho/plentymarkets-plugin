@@ -351,7 +351,7 @@ class ShipmentNotificationService
         return null;
       }
 
-      $this->loggerContract->alert(
+      $this->loggerContract->error(
         TranslationHelper::getLoggerKey(self::LOG_KEY_DEBUG_ORDER_PURCHASE_ORDER_AND_SHIPPING_INFO), [
           'additionalInfo' => [
             'order' => $order,
@@ -370,7 +370,7 @@ class ShipmentNotificationService
       //Decide how to get tracking and package information.
       if ($this->shipmentProviderService->isShippingWithWayfair() || empty($plentymarketsShippingInformation->shippingServiceProvider)) {
         // shipping on wayfair account
-        $this->loggerContract->critical(
+        $this->loggerContract->error(
           TranslationHelper::getLoggerKey(self::LOG_KEY_SHIPPING_ON_WAYFAIR), [
             'additionalInfo' => [
               'PoNumber' => $poNumber,
@@ -480,7 +480,7 @@ class ShipmentNotificationService
       } // end of shipping on Wayfair account
       else {
         //Ship on own account info, get data from PM.
-        $this->loggerContract->critical(
+        $this->loggerContract->error(
           TranslationHelper::getLoggerKey(self::LOG_KEY_SHIPPING_ON_OWN_ACCOUNT), [
             'additionalInfo' => [
               'PoNumber' => $poNumber,
@@ -592,7 +592,7 @@ class ShipmentNotificationService
       $wayfairDestinationAddress = $this->mapAddress($plentyDeliveryAddress);
       $requestDto->setDestinationAddress($wayfairDestinationAddress);
 
-      $this->loggerContract->critical(
+      $this->loggerContract->error(
         TranslationHelper::getLoggerKey('finishedPreparedDto'), [
           'additionalInfo' => $requestDto,
           'method' => __METHOD__
@@ -633,7 +633,7 @@ class ShipmentNotificationService
     $record = $this->orderASNRepository->findByOrderId($order->id);
 
     $this->loggerContract
-      ->alert(
+      ->error(
         TranslationHelper::getLoggerKey('checkIfASNSent'), [
           'additionalInfo' => ['orderId' => $order->id, 'record' => $record],
           'method' => __METHOD__
